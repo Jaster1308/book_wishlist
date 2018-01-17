@@ -3,15 +3,15 @@ from book import Book
 
 def display_menu_get_choice():
 
-    '''Display choices for user, return users' selection'''
+    """Display choices for user, return users' selection"""
 
-    print('''
+    print("""
         1. Show unread books (wishlist)
         2. Show books that have been read
         3. Mark a book as read
         4. Add book to wishlist
         q. Quit
-    ''')
+    """)
 
     choice = input('Enter your selection: ')
 
@@ -19,7 +19,7 @@ def display_menu_get_choice():
 
 
 def show_list(books):
-    ''' Format and display a list of book objects'''
+    """ Format and display a list of book objects"""
 
     if len(books) == 0:
         print ('* No books *')
@@ -32,8 +32,7 @@ def show_list(books):
 
 
 def ask_for_book_id():
-
-    ''' Ask user for book id, validate to ensure it is a positive integer '''
+    """ Ask user for book id, validate to ensure it is a positive integer """
 
     while True:
         try:
@@ -48,7 +47,7 @@ def ask_for_book_id():
 
 def get_new_book_info():
 
-    ''' Get title and author of new book from user '''
+    """ Get title and author of new book from user """
 
     title = input('Enter title: ')
     author = input('Enter author: ')
@@ -56,5 +55,5 @@ def get_new_book_info():
 
 
 def message(msg):
-    '''Display a message to the user'''
+    """Display a message to the user"""
     print(msg)
