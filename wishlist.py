@@ -25,6 +25,9 @@ def handle_choice(choice):
     elif choice == '6':
         search_book()
 
+    elif choice == '7':
+        del_book()
+
     elif choice == 'q':
         quit()
 
@@ -60,6 +63,14 @@ def new_book():
     n_book = ui.get_new_book_info()
     datastore.add_book(n_book)
     ui.message('Book added: ' + str(n_book))
+
+
+def del_book():
+    show_read()
+    book_id = int(input("Which book wouold you like to delete? "))
+    book = datastore.get_book(book_id)
+    if book:
+        datastore.delete_book(book)
 
 
 def rate_book():

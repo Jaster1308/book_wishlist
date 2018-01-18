@@ -12,6 +12,7 @@ def display_menu_get_choice():
         4. Add book to wishlist
         5. Rate book
         6. Search by Title or Author
+        7. Delete book
         q. Quit
     """)
 
