@@ -14,12 +14,13 @@ counter = 0
 
 def setup():
     """ Read book info from file, if file exists. """
-
     global counter
 
+    # reads them BOOKS_FILE_NAME file and passes make_book_list() as a calllback
     file.read(BOOKS_FILE_NAME, cb=make_book_list)
 
     try:
+        # reads COUNTER_FILE_NAME and loads it into memory
         counter = file.read(COUNTER_FILE_NAME)
         if not counter:
             counter = 0
@@ -123,15 +124,17 @@ def make_book_list(string_from_file):
         book_json = json.loads(string_from_file)
 
         for book in book_json:
-            book_list.append(Book(title=book["title"],
-                                  author=book["author"],
-                                  read=bool(book["read"]),
-                                  id=int(book["id"]),
-                                  stars=int(book["stars"]),
-                                  stars_str=book["stars_str"]))
+            book_list.append(
+                Book(
+                    title=book["title"],
+                    author=book["author"],
+                    read=bool(book["read"]),
+                    id=int(book["id"]),
+                    stars=int(book["stars"]),
+                    stars_str=book["stars_str"])
+                )
 
 
-# def make_output_data():
 def make_output_data(b_list=None):
     """ create a string containing all data on books, for writing to output file"""
 
