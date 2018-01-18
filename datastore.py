@@ -1,6 +1,7 @@
 
 import os
 from book import Book
+import files as file
 
 DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
@@ -17,21 +18,26 @@ def setup():
 
     global counter
 
-    try:
-        with open(BOOKS_FILE_NAME) as f:
-            data = f.read()
-            make_book_list(data)
-    except FileNotFoundError:
-        # First time program has run. Assume no books.
-        pass
+    # try:
+    #     with open(BOOKS_FILE_NAME) as f:
+    #         data = f.read()
+    #         make_book_list(data)
+    # except FileNotFoundError:
+    #     # First time program has run. Assume no books.
+    #     pass
+
+    file.read(BOOKS_FILE_NAME, cb=make_book_list)
 
     try:
-        with open(COUNTER_FILE_NAME) as f:
-            try:
-                counter = int(f.read())
-            except ValueError:
-                counter = 0
-    except:
+        # with open(COUNTER_FILE_NAME) as f:
+        #     try:
+        #         counter = int(f.read())
+        #     except ValueError:
+        #         counter = 0
+        counter = file.read(COUNTER_FILE_NAME)
+        if not counter:
+            counter = 0
+    except IOError:
         counter = len(book_list)
 
 
@@ -41,16 +47,19 @@ def shutdown():
     output_data = make_output_data()
 
     # Create data directory
-    try:
-        os.mkdir(DATA_DIR)
-    except FileExistsError:
-        pass # Ignore - if directory exists, don't need to do anything.
+    # try:
+    #     os.mkdir(DATA_DIR)
+    # except FileExistsError:
+    #     pass  # Ignore - if directory exists, don't need to do anything.
 
-    with open(BOOKS_FILE_NAME, 'w') as f:
-        f.write(output_data)
+    file.write(DATA_DIR, BOOKS_FILE_NAME, output_data)
+    file.write(DATA_DIR, COUNTER_FILE_NAME, counter)
 
-    with open(COUNTER_FILE_NAME, 'w') as f:
-        f.write(str(counter))
+    # with open(BOOKS_FILE_NAME, 'w') as f:
+    #     f.write(output_data)
+    #
+    # with open(COUNTER_FILE_NAME, 'w') as f:
+    #     f.write(str(counter))
 
 
 def get_books(**kwargs):
@@ -62,7 +71,7 @@ def get_books(**kwargs):
         return book_list
 
     if 'read' in kwargs:
-        read_books = [ book for book in book_list if book.read == kwargs['read'] ]
+        read_books = [book for book in book_list if book.read == kwargs['read']]
         return read_books
 
 
@@ -94,7 +103,7 @@ def set_read(book_id, read):
             book.read = True
             return True
 
-    return False # return False if book id is not found
+    return False  # return False if book id is not found
 
 
 def make_book_list(string_from_file):
