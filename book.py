@@ -28,3 +28,16 @@ class Book:
 
     def __eq__(self, other):
         return self.title == other.title and self.author == other.author and self.read == other.read and self.id==other.id
+
+    def getJSON(self):
+        json_str = "{ "
+        for attr, value in self.__dict__.items():
+            if isinstance(value, bool):
+                json_str += "\"{}\": {}, ".format(attr, str(value).lower())
+            elif isinstance(value, int):
+                json_str += "\"{}\": \"{}\", ".format(attr, value)
+            else:
+                json_str += "\"{}\": \"{}\", ".format(attr, value)
+        json_str = json_str[:-2]
+        json_str += " }"
+        return json_str
