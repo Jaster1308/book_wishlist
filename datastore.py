@@ -7,7 +7,7 @@ DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
 COUNTER_FILE_NAME = os.path.join(DATA_DIR, 'counter.txt')
 
-separator = '^^^'  # a string probably not in any valid data relating to a book
+separator = '^^^'  # a string probably not in any valid data relating to a book 
 
 book_list = []
 counter = 0
