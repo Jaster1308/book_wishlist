@@ -13,6 +13,7 @@ def display_menu_get_choice():
         5. Rate book
         6. Search by Title or Author
         7. Delete book
+        8. Edit
         q. Quit
     """)
 

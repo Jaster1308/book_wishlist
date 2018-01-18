@@ -101,6 +101,7 @@ def delete_book(book):
 
     print("Book hella deleted!")
 
+
 def generate_id():
     global counter
     counter += 1
