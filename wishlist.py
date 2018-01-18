@@ -21,6 +21,9 @@ def handle_choice(choice):
     elif choice == '5':
         rate_book()
 
+    elif choice == '6':
+        search_book()
+
     elif choice == 'q':
         quit()
 
@@ -76,6 +79,14 @@ def star_string(stars):
     if stars >= 0:
         stars_str = "⭐️" * stars
     return stars_str
+
+
+def search_book():
+    """Fetch and show all read books"""
+    search_string = input("Input the title or author of book: ")
+    searched = datastore.get_books(string=search_string)
+    ui.show_list(searched)
+    pass
 
 
 def quit():

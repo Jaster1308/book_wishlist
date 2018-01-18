@@ -1,8 +1,8 @@
-
 import os
 from book import Book
 import files as file
 import json
+import valid
 
 DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
@@ -45,8 +45,19 @@ def get_books(**kwargs):
         return book_list
 
     if 'read' in kwargs:
-        read_books = [book for book in book_list if book.read == kwargs['read']]
-        return read_books
+        if len(kwargs) == 1:
+            read_books = [book for book in book_list if book.read == kwargs['read']]
+            return read_books
+        else:
+            matching_books = [book for book in book_list if kwargs['string'] in book.title or kwargs['string'] in book.author]
+            return matching_books
+    else:
+        if len(kwargs) == 1:
+            matching_books = [book for book in book_list if kwargs['string'] in book.title or kwargs['string'] in book.author]
+            return matching_books
+        else:
+            unread_books = [book for book in book_list if book.read != kwargs['read']]
+            return unread_books
 
 
 def get_book(book_id):
@@ -54,8 +65,12 @@ def get_book(book_id):
     global book_list
 
     for book in book_list:
-        if book.id == book_id:
-            return book
+        if valid.is_number(book_id):
+            if book.id == int(book_id):
+                return book
+        else:
+            if book_id in book.author or book_id in book_id.title:
+                return book
     print("No book found with id {}.".format(book_id))
 
 
