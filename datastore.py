@@ -77,6 +77,14 @@ def add_book(book):
     book.id = generate_id()
     book_list.append(book)
 
+def delete_book(book):
+    '''Delete book from db, and update'''
+
+    global book_list
+
+    book_list.remove(book)
+
+    print("Book hella deleted!")
 
 def generate_id():
     global counter
