@@ -4,12 +4,14 @@ class Book:
 
     NO_ID = -1
 
-    def __init__(self, title, author, read=False, id=NO_ID):
+    def __init__(self, title, author, read=False, id=NO_ID, stars=-1, stars_str=""):
         """Default book is unread, and has no ID"""
         self.title = title
         self.author = author
         self.read = read
         self.id = id
+        self.stars = stars
+        self.stars_str = stars_str
 
     def set_id(self, id):
         self.id = id
@@ -24,12 +26,15 @@ class Book:
             id_str = '(no id)'
 
         template = 'id: {} Title: {} Author: {} Read: {}'
+        if self.stars >= 0:
+            template += " Stars: {}".format(self.stars_str)
         return template.format(id_str, self.title, self.author, read_str)
 
     def __eq__(self, other):
         return self.title == other.title and self.author == other.author and self.read == other.read and self.id==other.id
 
     def getJSON(self):
+        """Iterates over all properties in book object and builds a JSON string"""
         json_str = "{ "
         for attr, value in self.__dict__.items():
             if isinstance(value, bool):

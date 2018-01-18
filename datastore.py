@@ -49,6 +49,26 @@ def get_books(**kwargs):
         return read_books
 
 
+def get_book(book_id):
+    """ gets individual book by id """
+    global book_list
+
+    for book in book_list:
+        if book.id == book_id:
+            return book
+    print("No book found with id {}.".format(book_id))
+
+
+def update_book(updated_book):
+    """ updates an individual book """
+    global book_list
+
+    for x in range(len(book_list)):
+        if book_list[x - 1].id == updated_book.id:
+            book_list.pop(x-1)
+            book_list.append(updated_book)
+
+
 def add_book(book):
     """ Add to db, set id value, return Book"""
 
@@ -72,10 +92,6 @@ def set_read(book_id, read):
     global book_list
 
     for book in book_list:
-
-        print(book.id)
-        print(type(book.id))
-
         if book.id == book_id:
             book.read = True
             return True
@@ -88,12 +104,16 @@ def make_book_list(string_from_file):
 
     global book_list
 
-    if len(string_from_file) > 0 :
+    if len(string_from_file) > 0:
         book_json = json.loads(string_from_file)
-        
-        for json_obj in book_json:
-            book = Book(json_obj["title"], json_obj["author"], bool(json_obj["read"]), int(json_obj["id"]))
-            book_list.append(book)
+
+        for book in book_json:
+            book_list.append(Book(title=book["title"],
+                                  author=book["author"],
+                                  read=bool(book["read"]),
+                                  id=int(book["id"]),
+                                  stars=int(book["stars"]),
+                                  stars_str=book["stars_str"]))
 
 
 # def make_output_data():
@@ -112,7 +132,8 @@ def make_output_data(b_list=None):
         output_str = book.getJSON()
         output_data.append(output_str)
 
-    all_books_string = ', '.join(output_data)
+    all_books_string = "[ " + ', '.join(output_data) + " ]"
 
-    return "[ " + all_books_string + " ]"
+    return all_books_string
+
 

@@ -1,4 +1,4 @@
-#Main program
+# Main program
 
 import ui, datastore
 from book import Book
@@ -17,6 +17,9 @@ def handle_choice(choice):
 
     elif choice == '4':
         new_book()
+
+    elif choice == '5':
+        rate_book()
 
     elif choice == 'q':
         quit()
@@ -48,9 +51,31 @@ def book_read():
 
 def new_book():
     """Get info from user, add new book"""
-    new_book = ui.get_new_book_info()
-    datastore.add_book(new_book)
-    ui.message('Book added: ' + str(new_book))
+    n_book = ui.get_new_book_info()
+    datastore.add_book(n_book)
+    ui.message('Book added: ' + str(n_book))
+
+
+def rate_book():
+    show_read()
+    book_id = int(input("Which book would you like to rate? "))
+    book = datastore.get_book(book_id)
+    if book:
+        set_stars(book)
+
+
+def set_stars(book):
+    stars = int(input("How many stars would you rate {}? (1 - 5) ".format(book.title)))
+    book.stars = stars
+    book.stars_str = star_string(stars)
+    datastore.update_book(book)
+
+
+def star_string(stars):
+    stars_str = ""
+    if stars >= 0:
+        stars_str = "⭐️" * stars
+    return stars_str
 
 
 def quit():
