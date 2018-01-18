@@ -23,7 +23,7 @@ def handle_choice(choice):
         rate_book()
 
     elif choice == '6':
-        del_book()
+        search_book()
 
     elif choice == 'q':
         quit()
@@ -61,14 +61,6 @@ def new_book():
     datastore.add_book(n_book)
     ui.message('Book added: ' + str(n_book))
 
-def del_book():
-    '''Delete that book'''
-    show_read()
-    book_id = int(input("Which book wouold you like to delete? "))
-    book = datastore.get_book(book_id)
-    if book:
-        datastore.delete_book(book)
-
 
 def rate_book():
     show_read()
@@ -76,7 +68,6 @@ def rate_book():
     book = datastore.get_book(book_id)
     if book:
         set_stars(book)
-
 
 
 def set_stars(book):
@@ -91,6 +82,14 @@ def star_string(stars):
     if stars >= 0:
         stars_str = "⭐️" * stars
     return stars_str
+
+
+def search_book():
+    """Fetch and show all read books"""
+    search_string = input("Input the title or author of book: ")
+    searched = datastore.get_books(string=search_string)
+    ui.show_list(searched)
+    pass
 
 
 def quit():
