@@ -90,11 +90,7 @@ def make_book_list(string_from_file):
 
     if len(string_from_file) > 0 :
         book_json = json.loads(string_from_file)
-
-        print(book_json)
-
-        # books_str = string_from_file.split('\n')
-
+        
         for json_obj in book_json:
             book = Book(json_obj["title"], json_obj["author"], bool(json_obj["read"]), int(json_obj["id"]))
             book_list.append(book)
