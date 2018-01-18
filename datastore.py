@@ -8,8 +8,6 @@ DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
 COUNTER_FILE_NAME = os.path.join(DATA_DIR, 'counter.txt')
 
-# separator = '^^^'  # a string probably not in any valid data relating to a book
-
 book_list = []
 counter = 0
 
@@ -19,22 +17,9 @@ def setup():
 
     global counter
 
-    # try:
-    #     with open(BOOKS_FILE_NAME) as f:
-    #         data = f.read()
-    #         make_book_list(data)
-    # except FileNotFoundError:
-    #     # First time program has run. Assume no books.
-    #     pass
-
     file.read(BOOKS_FILE_NAME, cb=make_book_list)
 
     try:
-        # with open(COUNTER_FILE_NAME) as f:
-        #     try:
-        #         counter = int(f.read())
-        #     except ValueError:
-        #         counter = 0
         counter = file.read(COUNTER_FILE_NAME)
         if not counter:
             counter = 0
@@ -47,20 +32,8 @@ def shutdown():
 
     output_data = make_output_data()
 
-    # Create data directory
-    # try:
-    #     os.mkdir(DATA_DIR)
-    # except FileExistsError:
-    #     pass  # Ignore - if directory exists, don't need to do anything.
-
     file.write(DATA_DIR, BOOKS_FILE_NAME, output_data)
     file.write(DATA_DIR, COUNTER_FILE_NAME, counter)
-
-    # with open(BOOKS_FILE_NAME, 'w') as f:
-    #     f.write(output_data)
-    #
-    # with open(COUNTER_FILE_NAME, 'w') as f:
-    #     f.write(str(counter))
 
 
 def get_books(**kwargs):
@@ -128,23 +101,6 @@ def make_book_list(string_from_file):
 
 
 # def make_output_data():
-#     """ create a string containing all data on books, for writing to output file"""
-#
-#     global book_list
-#
-#     output_data = []
-#
-#     for book in book_list:
-#         output = [book.title, book.author, str(book.read), str(book.id)]
-#         output_str = separator.join(output)
-#         output_data.append(output_str)
-#
-#     all_books_string = '\n'.join(output_data)
-#
-#     return all_books_string
-
-
-# def make_output_data_test(b_list=None):
 def make_output_data(b_list=None):
     """ create a string containing all data on books, for writing to output file"""
 
