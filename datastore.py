@@ -93,6 +93,16 @@ def add_book(book):
     book.id = generate_id()
     book_list.append(book)
 
+def check_book(new_book):
+    '''See if there is a duplicate book'''
+    global book_list
+
+    for book in book_list:
+        if book.title == new_book.title:
+            if book.author == new_book.author:
+                return True
+    return False
+
 
 def delete_book(book):
     """ Delete book from db, and update """
