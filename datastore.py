@@ -103,7 +103,6 @@ def check_book(new_book):
                 return True
     return False
 
-
 def delete_book(book):
     """ Delete book from db, and update """
 

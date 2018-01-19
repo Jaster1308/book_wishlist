@@ -1,5 +1,5 @@
 from book import Book
-
+import operator
 
 def display_menu_get_choice():
 
@@ -20,6 +20,39 @@ def display_menu_get_choice():
     choice = input('Enter your selection: ')
 
     return choice
+
+def sort_books():
+    '''Sorts the display when choosing and option'''
+
+    while True:
+        print('''
+            How would you like to sort the list?
+            1. Book Author
+            2. Book Title
+        ''')
+
+        choose = input('Enter choice: ')
+
+        if choose == '1':
+            return 'author'
+        if choose == '2':
+            return 'title'
+        else:
+            print('That' + "'" + "s not a valid option....")
+
+def sort_list(books):
+    '''Now that I sorted the books, we need to put the list in order'''
+    sorting = sort_books()
+    if sorting == "author":
+        order_of_book = sorted(books, key=operator.attrgetter(sorting))
+        for book in order_of_book:
+            print(book)
+    elif sorting == "title":
+        order_of_book = sorted(books, key=operator.attrgetter(sorting))
+        for book in order_of_book:
+            print(book)
+    else:
+        print('You did not use the right option man.....')
 
 
 def show_list(books):

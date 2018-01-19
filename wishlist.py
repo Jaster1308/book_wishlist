@@ -12,6 +12,7 @@ def handle_choice(choice):
 
     elif choice == '2':
         show_read()
+        ui.sort_books()
 
     elif choice == '3':
         book_read()
