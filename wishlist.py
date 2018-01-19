@@ -52,6 +52,7 @@ def show_read():
         today = datetime.date.today()
         print(today)
 
+
 def book_read():
     """ Get choice from user, edit datastore, display success/error"""
     book_id = ui.ask_for_book_id()
@@ -74,6 +75,7 @@ def del_book():
     book = datastore.get_book(book_id)
     if book:
         datastore.delete_book(book)
+
 
 def edit_book():
     show_read()
