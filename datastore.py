@@ -101,12 +101,10 @@ def delete_book(book):
 
     print("Book hella deleted!")
 
-
 def generate_id():
     global counter
     counter += 1
     return counter
-
 
 def set_read(book_id, read):
     """Update book with given book_id to read.
