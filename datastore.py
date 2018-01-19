@@ -93,8 +93,9 @@ def add_book(book):
     book.id = generate_id()
     book_list.append(book)
 
+
 def delete_book(book):
-    '''Delete book from db, and update'''
+    """ Delete book from db, and update """
 
     global book_list
 
