@@ -1,6 +1,5 @@
 # Main program
 
-import datetime
 import ui, datastore
 from book import Book
 
@@ -49,9 +48,6 @@ def show_read():
     """Fetch and show all read books"""
     read = datastore.get_books(read=True)
     ui.show_list(read)
-    for x in read:
-        today = datetime.date.today()
-        print(today)
 
 
 def book_read():

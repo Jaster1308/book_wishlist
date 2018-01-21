@@ -3,10 +3,12 @@ from book import Book
 import files as file
 import json
 import valid
+import datetime
 
 DATA_DIR = 'data'
 BOOKS_FILE_NAME = os.path.join(DATA_DIR, 'wishlist.txt')
 COUNTER_FILE_NAME = os.path.join(DATA_DIR, 'counter.txt')
+Current_Date = datetime.datetime.now()
 
 book_list = []
 counter = 0
@@ -127,6 +129,7 @@ def set_read(book_id, read):
     for book in book_list:
         if book.id == book_id:
             book.read = True
+            book.date = "%d/%d/%d" %(Current_Date.month, Current_Date.day, Current_Date.year)
             return True
 
     return False  # return False if book id is not found

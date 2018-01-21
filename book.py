@@ -10,6 +10,7 @@ class Book:
         self.author = author
         self.read = read
         self.id = id
+        self.date = ''
         self.stars = stars
         self.stars_str = stars_str
 
@@ -25,10 +26,10 @@ class Book:
         if id == -1:
             id_str = '(no id)'
 
-        template = 'id: {} Title: {} Author: {} Read: {}'
+        template = 'id: {} Title: {} Author: {} Read: {} Date Read: {}'
         if self.stars >= 0:
             template += " Stars: {}".format(self.stars_str)
-        return template.format(id_str, self.title, self.author, read_str)
+        return template.format(id_str, self.title, self.author, read_str, self.date)
 
     def __eq__(self, other):
         return self.title == other.title and self.author == other.author and self.read == other.read and self.id==other.id
