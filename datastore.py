@@ -114,6 +114,21 @@ def delete_book(book):
 
     print("Book hella deleted!")
 
+def sort_list(books):
+    '''Now that I sorted the books, we need to put the list in order'''
+
+    global book_list
+
+    if books == "author":
+        order_of_book = sorted(book_list, key=lambda book: book.author)
+    elif books == "title":
+        order_of_book = sorted(book_list, key=lambda book: book.title)
+    else:
+        print('You did not use the right option man.....')
+
+    book_list = order_of_book
+    return book_list
+
 def generate_id():
     global counter
     counter += 1

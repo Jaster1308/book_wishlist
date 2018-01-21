@@ -11,7 +11,7 @@ def handle_choice(choice):
 
     elif choice == '2':
         show_read()
-        ui.sort_books()
+        sort_book()
 
     elif choice == '3':
         book_read()
@@ -57,6 +57,12 @@ def book_read():
         ui.message('Successfully updated')
     else:
         ui.message('Book id not found in database')
+
+def sort_book():
+    '''Gotta sort these books somehow'''
+
+    sorting = ui.getting_sorted_books()
+    datastore.sort_list(sorting)
 
 
 def new_book():
