@@ -55,3 +55,12 @@ class Book:
         json_str = json_str[:-2]
         json_str += " }"
         return json_str
+
+    def getSortTitle(self):
+        if 'the '.lower() in self.title[:4].lower():
+            return self.title[4:].lower()
+        if 'a '.lower() in self.title[:2].lower():
+            return self.title[2:].lower()
+        if 'an '.lower() in self.title[:3].lower():
+            return self.title[3:].lower()
+        return self.title.lower()

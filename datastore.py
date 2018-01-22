@@ -83,9 +83,9 @@ def update_book(updated_book):
     """ updates an individual book """
     global book_list
 
-    for x in range(len(book_list)):
-        if book_list[x - 1].id == updated_book.id:
-            book_list.pop(x-1)
+    for book_index in range(len(book_list)):
+        if book_list[book_index - 1].id == updated_book.id:
+            book_list.pop(book_index - 1)
             book_list.append(updated_book)
 
 
@@ -125,9 +125,9 @@ def sort_list(books):
     global book_list
 
     if books == "author":
-        order_of_book = sorted(book_list, key=lambda book: book.author)
+        order_of_book = sorted(book_list, key=lambda book: book.author.lower())
     elif books == "title":
-        order_of_book = sorted(book_list, key=lambda book: book.title)
+        order_of_book = sorted(book_list, key=lambda book: book.getSortTitle())
     else:
         print('You did not use the right option man.....')
 

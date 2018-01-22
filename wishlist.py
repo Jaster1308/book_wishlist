@@ -58,8 +58,9 @@ def book_read():
     else:
         ui.message('Book id not found in database')
 
+
 def sort_book():
-    '''Gotta sort these books somehow'''
+    """ Gotta sort these books somehow """
 
     sorting = ui.getting_sorted_books()
     datastore.sort_list(sorting)
@@ -75,6 +76,7 @@ def new_book():
 
 
 def del_book():
+    """ deletes book from the list """
     show_read()
     book_id = int(input("Which book wouold you like to delete? "))
     book = datastore.get_book(book_id)
@@ -83,6 +85,7 @@ def del_book():
 
 
 def edit_book():
+    """ edits book in book list """
     show_read()
     book_id = int(input("Which book would you like to edit? "))
     book = datastore.get_book(book_id)
@@ -93,6 +96,7 @@ def edit_book():
 
 
 def rate_book():
+    """ adds rating to book list"""
     show_read()
     book_id = int(input("Which book would you like to rate? "))
     book = datastore.get_book(book_id)
@@ -101,6 +105,7 @@ def rate_book():
 
 
 def set_stars(book):
+    """ stes the star rating for a particular book """
     stars = int(input("How many stars would you rate {}? (1 - 5) ".format(book.title)))
     book.stars = stars
     book.stars_str = star_string(stars)
@@ -108,6 +113,7 @@ def set_stars(book):
 
 
 def star_string(stars):
+    """ builds a string of stars from the rating """
     stars_str = ""
     if stars >= 0:
         stars_str = "⭐️" * stars
@@ -123,13 +129,13 @@ def search_book():
 
 
 def quit():
-    """Perform shutdown tasks"""
+    """ Perform shutdown tasks """
     datastore.shutdown()
     ui.message('Bye!')
 
 
 def main():
-
+    """ main loop """
     datastore.setup()
 
     quit = 'q'

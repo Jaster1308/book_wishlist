@@ -21,8 +21,9 @@ def display_menu_get_choice():
 
     return choice
 
+
 def getting_sorted_books():
-    '''Sorts the display when choosing and option'''
+    """ Sorts the display when choosing and option """
 
     while True:
         print('''
@@ -37,9 +38,12 @@ def getting_sorted_books():
             return choose.lower()
         if choose == 'title':
             return choose.lower()
+        if choose == '1':
+            return 'author'
+        if choose == '2':
+            return 'title'
         else:
-            print('That' + "'" + "s not a valid option....")
-
+            print("That's not a valid option....")
 
 
 def show_list(books):
