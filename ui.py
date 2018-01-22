@@ -60,7 +60,7 @@ def ask_for_book_id():
 
     while True:
         try:
-            book_id = int(input('Enter book id:'))
+            book_id = int(input('Enter book id: '))
             if book_id >= 0:
                 return book_id
             else:

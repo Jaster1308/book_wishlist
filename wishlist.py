@@ -10,8 +10,8 @@ def handle_choice(choice):
         show_unread()
 
     elif choice == '2':
-        show_read()
         sort_book()
+        show_read()
 
     elif choice == '3':
         book_read()
