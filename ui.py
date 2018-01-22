@@ -34,9 +34,9 @@ def getting_sorted_books():
         choose = input('Enter choice: ')
 
         if choose == 'author':
-            return choose
+            return choose.lower()
         if choose == 'title':
-            return choose
+            return choose.lower()
         else:
             print('That' + "'" + "s not a valid option....")
 
