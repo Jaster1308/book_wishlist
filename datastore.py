@@ -52,11 +52,13 @@ def get_books(**kwargs):
             read_books = [book for book in book_list if book.read == kwargs['read']]
             return read_books
         else:
-            matching_books = [book for book in book_list if kwargs['string'] in book.title or kwargs['string'] in book.author]
+            matching_books = [book for book in book_list if kwargs['string'].lower() in book.title.lower() or
+                              kwargs['string'].lower() in book.author.lower()]
             return matching_books
     else:
         if len(kwargs) == 1:
-            matching_books = [book for book in book_list if kwargs['string'] in book.title or kwargs['string'] in book.author]
+            matching_books = [book for book in book_list if kwargs['string'].lower() in book.title.lower() or
+                              kwargs['string'].lower() in book.author.lower()]
             return matching_books
         else:
             unread_books = [book for book in book_list if book.read != kwargs['read']]
@@ -88,15 +90,16 @@ def update_book(updated_book):
 
 
 def add_book(book):
-    """ Add to db, set id value, return Book"""
+    """ Add to db, set id value, return Book """
 
     global book_list
 
     book.id = generate_id()
     book_list.append(book)
 
+
 def check_book(new_book):
-    '''See if there is a duplicate book'''
+    """ See if there is a duplicate book """
     global book_list
 
     for book in book_list:
@@ -104,6 +107,7 @@ def check_book(new_book):
             if book.author == new_book.author:
                 return True
     return False
+
 
 def delete_book(book):
     """ Delete book from db, and update """
@@ -114,8 +118,9 @@ def delete_book(book):
 
     print("Book hella deleted!")
 
+
 def sort_list(books):
-    '''Now that I sorted the books, we need to put the list in order'''
+    """ Now that I sorted the books, we need to put the list in order """
 
     global book_list
 
@@ -129,10 +134,12 @@ def sort_list(books):
     book_list = order_of_book
     return book_list
 
+
 def generate_id():
     global counter
     counter += 1
     return counter
+
 
 def set_read(book_id, read):
     """Update book with given book_id to read.
@@ -146,7 +153,6 @@ def set_read(book_id, read):
             book.read = True
             book.date = "%d/%d/%d" %(Current_Date.month, Current_Date.day, Current_Date.year)
             return True
-
     return False  # return False if book id is not found
 
 
@@ -159,14 +165,23 @@ def make_book_list(string_from_file):
         book_json = json.loads(string_from_file)
 
         for book in book_json:
+            if 'stars_str' in book:
+                stars_str = book["stars_str"]
+            else:
+                stars_str = ""
+            if 'date' in book:
+                date = book["date"]
+            else:
+                date = ""
             book_list.append(
                 Book(
                     title=book["title"],
                     author=book["author"],
                     read=bool(book["read"]),
                     id=int(book["id"]),
+                    date=date,
                     stars=int(book["stars"]),
-                    stars_str=book["stars_str"])
+                    stars_str=stars_str)
                 )
 
 
